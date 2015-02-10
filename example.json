@@ -2,5 +2,9 @@
   "source": "C:/Users/Alex/Downloads",
   "scan": true,
   "interval": 5,
-  "destination": "C:/Users/Alex/Documents"
+  "actions": [
+  	{ 
+  		"pattern": "This"
+  	}
+  ]
 }
