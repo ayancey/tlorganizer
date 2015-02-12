@@ -4,7 +4,9 @@
   "interval": 5,
   "actions": [
   	{ 
-  		"pattern": "This"
+  		"pattern": "This",
+  		"action": "test",
+  		"destination": "that"
   	}
   ]
 }
