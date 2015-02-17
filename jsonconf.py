@@ -1,19 +1,33 @@
+import sys
 import json
 from jsonschema import validate
 
-fi = open('example.json')
-myson = fi.read()
-fi.close()
+sys.tracebacklimit = 0
 
-fi = open('schema/config.json')
-schema = fi.read()
-fi.close()
+# Read/load example
+file = open('example.json')
+raw = file.read()
+file.close()
 
+# Accepts raw JSON
+def load_config(jconfig):
+	config = json.loads(jconfig)
 
-config = json.loads(myson)
-schema = json.loads(schema)
+	# Read/load schema
+	file = open('schema/config.json')
+	raw = file.read()
+	file.close()
+	schema = json.loads(raw)
 
-print validate(config, schema)
+	# Validate file per schema, throws big errors if it finds anything wrong
+	validate(config, schema)
 
-for thing in config:
-	print thing + ' ' + str(config[thing])
+	if config['scan']:
+		try:
+			config['interval']
+		except:
+			raise ValueError("Interval must be specified in scan mode.")
+
+	return config
+
+load_config(raw)

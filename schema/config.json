@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Scanner",
-  "description": "Checks a directory for changes, and performs file managment operations accordingly.",
+  "title": "JSON schema for configuring tlorganizer.",
   "type": "object",
   "additionalProperties": false,
   "required": ["source", "scan", "actions"],
@@ -22,6 +21,8 @@
     },
     "actions": {
       "type": "array",
+      "additionalProperties": false,
+      "required": ["pattern", "action", "destination"],
       "items": {
         "type": "object",
         "properties": {
@@ -37,9 +38,7 @@
             "description": "The new destination directory of the file. (applicable to copy and move)",
             "type": "string"
           }
-        },
-        "required": ["pattern", "action", "destination"],
-        "additionalProperties": false
+        }
       }
     }
   }
