@@ -4,11 +4,6 @@ from jsonschema import validate
 
 sys.tracebacklimit = 0
 
-# Read/load example
-file = open('example.json')
-raw = file.read()
-file.close()
-
 # Accepts raw JSON
 def load_config(jconfig):
 	config = json.loads(jconfig)
@@ -29,5 +24,3 @@ def load_config(jconfig):
 			raise ValueError("Interval must be specified in scan mode.")
 
 	return config
-
-load_config(raw)
