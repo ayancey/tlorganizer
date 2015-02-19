@@ -1,0 +1,12 @@
+{
+  "source": "C:/Users/Alex/Downloads",
+  "scan": true,
+  "interval": 1,
+  "actions": [
+  	{ 
+  		"pattern": ".*",
+  		"action": "move",
+  		"destination": "C:/Users/Alex/Documents"
+  	}
+  ]
+}

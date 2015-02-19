@@ -22,9 +22,9 @@
     "actions": {
       "type": "array",
       "additionalProperties": false,
-      "required": ["pattern", "action", "destination"],
       "items": {
         "type": "object",
+        "required": ["pattern", "action", "destination"],
         "properties": {
           "pattern": {
             "description": "Regular expression to match filename with action.",
