@@ -1,5 +1,5 @@
 from jsonconf import load_config
-from dirmon.dirmon import DirectoryMonitor
+from dirmon import DirectoryMonitor
 import shutil
 import re
 
