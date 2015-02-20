@@ -15,8 +15,11 @@ def added(file):
 	for action in config['actions']:
 		if not re.match(action['pattern'], file) == None:
 			if action['action'] == 'move':
-				print config['source'] + '/' + file + ' (to) ' + action['destination'] + '/' + file
+				print config['source'] + '/' + file + ' (move to) ' + action['destination'] + '/' + file
 				move(config['source'] + '/' + file, action['destination'] + '/' + file)
+			if action['action'] == 'copy':
+				print config['source'] + '/' + file + ' (copy to) ' + action['destination'] + '/' + file
+				shutil.copyfile(config['source'] + '/' + file, action['destination'] + '/' + file)			
 
 def removed(file):
 	print('Removed: ' + file)
