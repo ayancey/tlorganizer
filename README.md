@@ -8,3 +8,4 @@ Useful for:
 # Requirements
 * Python 2.7+
 * [dirmon](https://github.com/ayancey/dirmon)
+* [jsonschema](https://github.com/Julian/jsonschema)
