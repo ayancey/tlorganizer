@@ -2,16 +2,16 @@ from jsonconf import load_config
 from dirmon import DirectoryMonitor
 import shutil
 import re
+from os import listdir
+
+config_file = open('example.json')
+config = load_config(config_file.read())
 
 # http://www.pythoncentral.io/how-to-rename-move-a-file-in-python/
 def move(src, dest):
     shutil.move(src, dest)
 
-config_file = open('example.json')
-config = load_config(config_file.read())
-
-def added(file):
-	print('Added: ' + file)
+def search(file):
 	for action in config['actions']:
 		if not re.match(action['pattern'], file) == None:
 			if action['action'] == 'move':
@@ -19,7 +19,12 @@ def added(file):
 				move(config['source'] + '/' + file, action['destination'] + '/' + file)
 			if action['action'] == 'copy':
 				print config['source'] + '/' + file + ' (copy to) ' + action['destination'] + '/' + file
-				shutil.copyfile(config['source'] + '/' + file, action['destination'] + '/' + file)			
+				shutil.copyfile(config['source'] + '/' + file, action['destination'] + '/' + file)
+
+def added(file):
+	print('Added: ' + file)
+	search(file)
+			
 
 def removed(file):
 	print('Removed: ' + file)
@@ -32,14 +37,9 @@ if (config['scan'] == True):
 	monitor.on_removed = removed
 	monitor.start()
 else:
-	for action in config['actions']:
-		if not re.match(action['pattern'], file) == None:
-			if action['action'] == 'move':
-				print config['source'] + '/' + file + ' (move to) ' + action['destination'] + '/' + file
-				move(config['source'] + '/' + file, action['destination'] + '/' + file)
-			if action['action'] == 'copy':
-				print config['source'] + '/' + file + ' (copy to) ' + action['destination'] + '/' + file
-				shutil.copyfile(config['source'] + '/' + file, action['destination'] + '/' + file)			
+	print config['source']
+	for file in listdir(config['source']):
+		search(file)
 
 #for action in config['actions']:
 #	print action
