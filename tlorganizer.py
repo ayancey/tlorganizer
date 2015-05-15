@@ -31,7 +31,15 @@ if (config['scan'] == True):
 	monitor.on_added = added
 	monitor.on_removed = removed
 	monitor.start()
-
+else:
+	for action in config['actions']:
+		if not re.match(action['pattern'], file) == None:
+			if action['action'] == 'move':
+				print config['source'] + '/' + file + ' (move to) ' + action['destination'] + '/' + file
+				move(config['source'] + '/' + file, action['destination'] + '/' + file)
+			if action['action'] == 'copy':
+				print config['source'] + '/' + file + ' (copy to) ' + action['destination'] + '/' + file
+				shutil.copyfile(config['source'] + '/' + file, action['destination'] + '/' + file)			
 
 #for action in config['actions']:
 #	print action
